@@ -1,0 +1,98 @@
+// Définition de l'entité Voyageur
+entity Voyageur {
+  nom String,
+  email String,
+  motDePasse String,
+}
+
+// Définition de l'entité Reservation
+entity Reservation {
+  dateDebut LocalDate,
+  dateFin LocalDate,
+  typeService ServiceType,
+}
+
+// Définition de l'entité Vol
+entity Vol {
+  compagnie String,
+  horaire String,
+  tarif Double,
+  siegesDisponibles Integer,
+}
+
+// Définition de l'entité Hotel
+entity Hotel {
+  nom String,
+  localisation String,
+}
+
+// Définition de l'entité Activite
+entity Activite {
+  nom String,
+  description String,
+  lieu String,
+}
+
+// Définition de l'entité Paiement
+entity Paiement {
+  montant Double,
+  datePaiement ZonedDateTime,
+}
+
+// Enumeration pour le type de notification
+enum NotificationType {
+  CONFIRMATION, ALERTE, ANNULATION
+}
+
+// Définition de l'entité Notification
+entity Notification {
+  type NotificationType,
+  contenu String,
+  destinataire Long,
+}
+
+// Définition de l'entité Commentaire
+entity Commentaire {
+  texte String,
+  note Integer,
+}
+
+// Enumeration pour le type de service (Vol, Hotel, Activite)
+enum ServiceType {
+  VOL, HOTEL, ACTIVITE
+}
+
+// Relation entre Voyageur et Reservation (OneToMany)
+relationship OneToMany {
+  Voyageur{reservations} to Reservation{voyageur}
+}
+
+// Relation entre Reservation et Vol (ManyToMany)
+relationship ManyToMany {
+  Reservation{vols} to Vol{reservations}
+}
+
+// Relation entre Reservation et Hotel (ManyToMany)
+relationship ManyToMany {
+  Reservation{hotels} to Hotel{reservations}
+}
+
+// Relation entre Reservation et Activite (ManyToMany)
+relationship ManyToMany {
+  Reservation{activites} to Activite{reservations}
+}
+
+// Relation entre Paiement et Reservation (ManyToOne)
+relationship ManyToOne {
+  Paiement{reservation} to Reservation{paiements}
+}
+
+// Relation entre Notification et Reservation (ManyToOne)
+relationship ManyToOne {
+  Notification{reservation} to Reservation{notifications}
+}
+
+// Relation entre Commentaire et Reservation (ManyToOne)
+relationship ManyToOne {
+  Commentaire{reservation} to Reservation{commentaires}
+}

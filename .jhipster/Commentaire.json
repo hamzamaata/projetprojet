@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240109102417"
+  },
+  "applications": "*",
+  "entityTableName": "commentaire",
+  "fields": [
+    {
+      "fieldName": "texte",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Commentaire",
+  "relationships": [
+    {
+      "otherEntityName": "reservation",
+      "otherEntityRelationshipName": "commentaires",
+      "relationshipName": "reservation",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

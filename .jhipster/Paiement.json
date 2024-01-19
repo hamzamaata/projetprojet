@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240109102217"
+  },
+  "applications": "*",
+  "entityTableName": "paiement",
+  "fields": [
+    {
+      "fieldName": "montant",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "datePaiement",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "name": "Paiement",
+  "relationships": [
+    {
+      "otherEntityName": "reservation",
+      "otherEntityRelationshipName": "paiements",
+      "relationshipName": "reservation",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

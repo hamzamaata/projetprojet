@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20240109102117"
+  },
+  "applications": "*",
+  "entityTableName": "activite",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lieu",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Activite",
+  "relationships": [
+    {
+      "otherEntityName": "reservation",
+      "otherEntityRelationshipName": "activites",
+      "relationshipName": "reservations",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

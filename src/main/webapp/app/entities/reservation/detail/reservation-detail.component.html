@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reservation) {
+      <div>
+        <h2 data-cy="reservationDetailsHeading"><span>Reservation</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ reservation.id }}</span>
+          </dd>
+          <dt><span>Date Debut</span></dt>
+          <dd>
+            <span>{{ reservation.dateDebut | formatMediumDate }}</span>
+          </dd>
+          <dt><span>Date Fin</span></dt>
+          <dd>
+            <span>{{ reservation.dateFin | formatMediumDate }}</span>
+          </dd>
+          <dt><span>Type Service</span></dt>
+          <dd>
+            <span>{{ reservation.typeService }}</span>
+          </dd>
+          <dt><span>Vols</span></dt>
+          <dd>
+            @for (vols of reservation.vols; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/vol', vols.id, 'view']">{{ vols.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span>Hotels</span></dt>
+          <dd>
+            @for (hotels of reservation.hotels; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/hotel', hotels.id, 'view']">{{ hotels.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span>Activites</span></dt>
+          <dd>
+            @for (activites of reservation.activites; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/activite', activites.id, 'view']">{{ activites.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span>Voyageur</span></dt>
+          <dd>
+            @if (reservation.voyageur) {
+              <div>
+                <a [routerLink]="['/voyageur', reservation.voyageur.id, 'view']">{{ reservation.voyageur.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/reservation', reservation.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

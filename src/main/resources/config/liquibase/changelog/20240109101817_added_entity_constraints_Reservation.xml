@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Reservation.
+    -->
+    <changeSet id="20240109101817-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="reservation_id"
+                                 baseTableName="rel_reservation__vols"
+                                 constraintName="fk_rel_reservation__vols__reservation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reservation"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="vols_id"
+                                 baseTableName="rel_reservation__vols"
+                                 constraintName="fk_rel_reservation__vols__vols_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vol"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="reservation_id"
+                                 baseTableName="rel_reservation__hotels"
+                                 constraintName="fk_rel_reservation__hotels__reservation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reservation"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="hotels_id"
+                                 baseTableName="rel_reservation__hotels"
+                                 constraintName="fk_rel_reservation__hotels__hotels_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hotel"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="reservation_id"
+                                 baseTableName="rel_reservation__activites"
+                                 constraintName="fk_rel_reservation__activites__reservation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="reservation"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="activites_id"
+                                 baseTableName="rel_reservation__activites"
+                                 constraintName="fk_rel_reservation__activites__activites_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activite"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="voyageur_id"
+                                 baseTableName="reservation"
+                                 constraintName="fk_reservation__voyageur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="voyageur"
+                                 />
+    </changeSet>
+</databaseChangeLog>

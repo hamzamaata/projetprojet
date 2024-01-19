@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (vol) {
+      <div>
+        <h2 data-cy="volDetailsHeading"><span>Vol</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ vol.id }}</span>
+          </dd>
+          <dt><span>Compagnie</span></dt>
+          <dd>
+            <span>{{ vol.compagnie }}</span>
+          </dd>
+          <dt><span>Horaire</span></dt>
+          <dd>
+            <span>{{ vol.horaire }}</span>
+          </dd>
+          <dt><span>Tarif</span></dt>
+          <dd>
+            <span>{{ vol.tarif }}</span>
+          </dd>
+          <dt><span>Sieges Disponibles</span></dt>
+          <dd>
+            <span>{{ vol.siegesDisponibles }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/vol', vol.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

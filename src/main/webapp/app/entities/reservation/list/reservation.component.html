@@ -1,0 +1,157 @@
+<div>
+  <h2 id="page-heading" data-cy="ReservationHeading">
+    <span>Reservations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-reservation"
+        [routerLink]="['/reservation/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer un nouveau Reservation</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (reservations?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>Aucun Reservation trouvé</span>
+    </div>
+  }
+
+  @if (reservations && reservations.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateDebut">
+              <div class="d-flex">
+                <span>Date Debut</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateFin">
+              <div class="d-flex">
+                <span>Date Fin</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="typeService">
+              <div class="d-flex">
+                <span>Type Service</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="vols.id">
+              <div class="d-flex">
+                <span>Vols</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="hotels.id">
+              <div class="d-flex">
+                <span>Hotels</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="activites.id">
+              <div class="d-flex">
+                <span>Activites</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="voyageur.id">
+              <div class="d-flex">
+                <span>Voyageur</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reservation of reservations; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/reservation', reservation.id, 'view']">{{ reservation.id }}</a>
+              </td>
+              <td>{{ reservation.dateDebut | formatMediumDate }}</td>
+              <td>{{ reservation.dateFin | formatMediumDate }}</td>
+              <td>{{ reservation.typeService }}</td>
+              <td>
+                @for (vols of reservation.vols; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/vol', vols.id, 'view']">{{ vols.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (hotels of reservation.hotels; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/hotel', hotels.id, 'view']">{{ hotels.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (activites of reservation.activites; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/activite', activites.id, 'view']">{{ activites.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @if (reservation.voyageur) {
+                  <div>
+                    <a [routerLink]="['/voyageur', reservation.voyageur.id, 'view']">{{ reservation.voyageur.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/reservation', reservation.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/reservation', reservation.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(reservation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

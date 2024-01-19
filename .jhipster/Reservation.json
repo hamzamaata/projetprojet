@@ -1,0 +1,75 @@
+{
+  "annotations": {
+    "changelogDate": "20240109101817"
+  },
+  "applications": "*",
+  "entityTableName": "reservation",
+  "fields": [
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "typeService",
+      "fieldType": "ServiceType",
+      "fieldValues": "VOL,HOTEL,ACTIVITE"
+    }
+  ],
+  "name": "Reservation",
+  "relationships": [
+    {
+      "otherEntityName": "vol",
+      "otherEntityRelationshipName": "reservations",
+      "relationshipName": "vols",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "hotel",
+      "otherEntityRelationshipName": "reservations",
+      "relationshipName": "hotels",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "activite",
+      "otherEntityRelationshipName": "reservations",
+      "relationshipName": "activites",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "voyageur",
+      "otherEntityRelationshipName": "reservations",
+      "relationshipName": "voyageur",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "paiement",
+      "otherEntityRelationshipName": "reservation",
+      "relationshipName": "paiements",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "notification",
+      "otherEntityRelationshipName": "reservation",
+      "relationshipName": "notifications",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "commentaire",
+      "otherEntityRelationshipName": "reservation",
+      "relationshipName": "commentaires",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

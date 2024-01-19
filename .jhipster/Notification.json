@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240109102317"
+  },
+  "applications": "*",
+  "entityTableName": "notification",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "NotificationType",
+      "fieldValues": "CONFIRMATION,ALERTE,ANNULATION"
+    },
+    {
+      "fieldName": "contenu",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "destinataire",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "Notification",
+  "relationships": [
+    {
+      "otherEntityName": "reservation",
+      "otherEntityRelationshipName": "notifications",
+      "relationshipName": "reservation",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

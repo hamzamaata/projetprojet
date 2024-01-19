@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20240109101917"
+  },
+  "applications": "*",
+  "entityTableName": "vol",
+  "fields": [
+    {
+      "fieldName": "compagnie",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "horaire",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tarif",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "siegesDisponibles",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Vol",
+  "relationships": [
+    {
+      "otherEntityName": "reservation",
+      "otherEntityRelationshipName": "vols",
+      "relationshipName": "reservations",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

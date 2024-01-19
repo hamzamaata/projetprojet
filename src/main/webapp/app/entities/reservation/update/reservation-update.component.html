@@ -1,0 +1,146 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-reservation-heading" data-cy="ReservationCreateUpdateHeading">Créer ou éditer un Reservation</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDebut">Date Debut</label>
+          <div class="input-group">
+            <input
+              id="field_dateDebut"
+              data-cy="dateDebut"
+              type="text"
+              class="form-control"
+              name="dateDebut"
+              ngbDatepicker
+              #dateDebutDp="ngbDatepicker"
+              formControlName="dateDebut"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDebutDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateFin">Date Fin</label>
+          <div class="input-group">
+            <input
+              id="field_dateFin"
+              data-cy="dateFin"
+              type="text"
+              class="form-control"
+              name="dateFin"
+              ngbDatepicker
+              #dateFinDp="ngbDatepicker"
+              formControlName="dateFin"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateFinDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_typeService">Type Service</label>
+          <select class="form-control" name="typeService" formControlName="typeService" id="field_typeService" data-cy="typeService">
+            <option [ngValue]="null"></option>
+            @for (serviceType of serviceTypeValues; track $index) {
+              <option [value]="serviceType">{{ serviceType }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_vols">Vols</label>
+          <select
+            class="form-control"
+            id="field_vols"
+            data-cy="vols"
+            multiple
+            name="vols"
+            formControlName="vols"
+            [compareWith]="compareVol"
+          >
+            @for (volOption of volsSharedCollection; track $index) {
+              <option [ngValue]="volOption">{{ volOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_hotels">Hotels</label>
+          <select
+            class="form-control"
+            id="field_hotels"
+            data-cy="hotels"
+            multiple
+            name="hotels"
+            formControlName="hotels"
+            [compareWith]="compareHotel"
+          >
+            @for (hotelOption of hotelsSharedCollection; track $index) {
+              <option [ngValue]="hotelOption">{{ hotelOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_activites">Activites</label>
+          <select
+            class="form-control"
+            id="field_activites"
+            data-cy="activites"
+            multiple
+            name="activites"
+            formControlName="activites"
+            [compareWith]="compareActivite"
+          >
+            @for (activiteOption of activitesSharedCollection; track $index) {
+              <option [ngValue]="activiteOption">{{ activiteOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_voyageur">Voyageur</label>
+          <select
+            class="form-control"
+            id="field_voyageur"
+            data-cy="voyageur"
+            name="voyageur"
+            formControlName="voyageur"
+            [compareWith]="compareVoyageur"
+          >
+            <option [ngValue]="null"></option>
+            @for (voyageurOption of voyageursSharedCollection; track $index) {
+              <option [ngValue]="voyageurOption">{{ voyageurOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

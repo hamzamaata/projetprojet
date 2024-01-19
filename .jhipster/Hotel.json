@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240109102017"
+  },
+  "applications": "*",
+  "entityTableName": "hotel",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "localisation",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Hotel",
+  "relationships": [
+    {
+      "otherEntityName": "reservation",
+      "otherEntityRelationshipName": "hotels",
+      "relationshipName": "reservations",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
